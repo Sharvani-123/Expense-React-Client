@@ -166,6 +166,7 @@ function GroupExpenses() {
                     <ExpenseList
                         expenses={expenses}
                         onRefresh={fetchGroupAndExpenses}
+                        nameByEmail={nameByEmail}
                     />
                 </div>
             </div>

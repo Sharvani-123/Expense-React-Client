@@ -1,4 +1,11 @@
-function ExpenseList({ expenses, onRefresh }) {
+function ExpenseList({ expenses, onRefresh, nameByEmail = {} }) {
+    const getPaidByLabel = (paidBy) => {
+        if (!paidBy) return "";
+        if (typeof paidBy === "string") return paidBy;
+        if (paidBy.email && nameByEmail[paidBy.email]) return nameByEmail[paidBy.email];
+        return paidBy.name || paidBy.email || "";
+    };
+
     return (
         <div className="card border-0 shadow-sm rounded-4">
             <div className="card-body p-4">
@@ -29,9 +36,7 @@ function ExpenseList({ expenses, onRefresh }) {
                                         </div>
                                         <div className="text-muted small">
                                             Paid by{" "}
-                                            {expense.paidBy?.name ||
-                                                expense.paidBy?.email ||
-                                                expense.paidBy}
+                                            {getPaidByLabel(expense.paidBy)}
                                         </div>
                                     </div>
                                     <div className="fw-bold">
